@@ -1,3 +1,5 @@
+Do not use this project for commercial purposes. This project is intended only for personal learning. It should only be used with websites that officially allow users to download their own videos or publicly available videos. Do not use this project to download copyrighted or unauthorized content.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
