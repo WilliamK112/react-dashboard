@@ -1,7 +1,33 @@
 .dashboard {
+  --mx: 50%;
+  --my: 20%;
+  --scroll-progress: 0;
   padding: 32px;
   display: grid;
   gap: 20px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.mouse-glow {
+  position: absolute;
+  inset: -220px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  background:
+    radial-gradient(
+      circle at var(--mx) var(--my),
+      rgba(59, 130, 246, 0.22) 0%,
+      rgba(99, 102, 241, 0.16) 20%,
+      rgba(2, 6, 23, 0) 55%
+    );
+}
+
+.mouse-glow.is-active {
+  opacity: 1;
 }
 
 .header {
@@ -9,6 +35,17 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  backdrop-filter: blur(10px);
+  padding: calc(10px - 4px * var(--scroll-progress)) 0;
+  transform: translateY(calc(-4px * var(--scroll-progress)));
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
 }
 
 .eyebrow {
@@ -30,6 +67,24 @@
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+.action:active {
+  transform: translateY(0);
+}
+
+.action.ghost {
+  background: rgba(37, 99, 235, 0.16);
+  border: 1px solid rgba(96, 165, 250, 0.35);
 }
 
 .card-grid {
@@ -39,10 +94,23 @@
 }
 
 .metric-card {
-  background: #111827;
-  border: 1px solid #1f2937;
+  background: linear-gradient(160deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.86));
+  border: 1px solid rgba(59, 130, 246, 0.24);
   border-radius: 14px;
   padding: 14px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+  will-change: transform;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 165, 250, 0.56);
+  box-shadow:
+    0 14px 30px rgba(2, 6, 23, 0.45),
+    0 0 0 1px rgba(96, 165, 250, 0.14) inset;
 }
 
 .metric-label {
@@ -59,10 +127,20 @@
 }
 
 .panel {
-  background: #111827;
-  border: 1px solid #1f2937;
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(9, 14, 26, 0.93));
+  border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 14px;
   padding: 16px;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.panel:hover {
+  transform: translateY(-2px);
+  border-color: rgba(129, 140, 248, 0.5);
+  box-shadow: 0 12px 34px rgba(2, 6, 23, 0.46);
 }
 
 .panel-head {
@@ -106,6 +184,17 @@
   background: #1d4ed8;
   border-color: #1d4ed8;
   cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease;
+}
+
+.single-form button:hover,
+.secondary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(29, 78, 216, 0.35);
+  filter: saturate(1.06);
 }
 
 .single-form button:disabled,
@@ -147,6 +236,11 @@
   grid-template-columns: 52px 1fr;
   gap: 8px;
   align-items: start;
+  transition: transform 140ms ease;
+}
+
+.activity-list li:hover {
+  transform: translateX(2px);
 }
 
 .activity-list time {
@@ -174,6 +268,17 @@
 .progress-fill {
   height: 100%;
   background: #60a5fa;
+  transition: width 260ms ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0) 12%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 88%);
+  transform: translateX(-120%);
+  animation: progress-shimmer 1.6s linear infinite;
 }
 
 .status-done {
@@ -187,6 +292,41 @@
 .activity-list small {
   color: #9ca3af;
   font-size: 12px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes progress-shimmer {
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mouse-glow,
+  .action,
+  .metric-card,
+  .panel,
+  .single-form button,
+  .secondary-btn,
+  .activity-list li,
+  .progress-fill,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 @media (max-width: 900px) {
