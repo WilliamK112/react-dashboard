@@ -2,7 +2,7 @@ Do not use this project for commercial purposes. This project is intended only f
 
 ## Product Demo
 
-<video src="./public/dashboard-demo.mp4" controls muted playsinline width="960"></video>
+![Dashboard demo preview](./public/dashboard-demo-preview.gif)
 
 If your viewer does not support embedded video, download the file here: [dashboard-demo.mp4](./public/dashboard-demo.mp4).
 
