@@ -48,6 +48,20 @@
   gap: 8px;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  border-radius: 16px;
+  filter: drop-shadow(0 6px 16px rgba(34, 211, 238, 0.35));
+}
+
 .eyebrow {
   color: #93c5fd;
   font-size: 13px;
@@ -344,5 +358,10 @@
 
   .single-form {
     grid-template-columns: 1fr;
+  }
+
+  .brand-logo {
+    width: 50px;
+    height: 50px;
   }
 }

@@ -33,6 +33,7 @@ const COPY = {
     hint: 'Hint',
     noJobs: 'No jobs yet. Paste a link to get started.',
     language: '中文',
+    logoAlt: 'Video Downloader Dashboard logo',
     status: {
       queued: 'queued',
       downloading: 'downloading',
@@ -71,6 +72,7 @@ const COPY = {
     hint: '提示',
     noJobs: '暂无任务，先贴一个链接试试。',
     language: 'EN',
+    logoAlt: '视频下载控制台 logo',
     status: {
       queued: '排队中',
       downloading: '下载中',
@@ -252,10 +254,13 @@ function App() {
     >
       <div className={`mouse-glow ${pointer.inside ? 'is-active' : ''}`} />
       <header className="header reveal is-visible">
-        <div>
+        <div className="brand">
+          <img className="brand-logo" src="/logo-claw.png" alt={copy.logoAlt} />
+          <div>
           <p className="eyebrow">{copy.eyebrow}</p>
           <h1>{copy.title}</h1>
           <p className="subtext">{copy.subtitle}</p>
+          </div>
         </div>
         <div className="header-actions">
           <button
