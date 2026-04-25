@@ -1,5 +1,11 @@
 Do not use this project for commercial purposes. This project is intended only for personal learning. It should only be used with websites that officially allow users to download their own videos or publicly available videos. Do not use this project to download copyrighted or unauthorized content.
 
+## Product Demo
+
+<video src="./public/dashboard-demo.mp4" controls muted playsinline width="960"></video>
+
+If your viewer does not support embedded video, download the file here: [dashboard-demo.mp4](./public/dashboard-demo.mp4).
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
